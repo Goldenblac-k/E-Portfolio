@@ -1,18 +1,17 @@
 const nav = document.querySelector('nav');
-const textHidden = document.querySelector('.textHidden')
-const grille = document.getElementsByClassName("grille")[0]
+const textHidden = document.querySelector('.textHidden');
+const grille = document.getElementsByClassName("grille")[0];
 const swipL = document.getElementById('swipLeft');
 const swipR = document.getElementById('swipRight');
 const container = document.getElementsByClassName('container')[0];
 const img = document.getElementsByClassName('imagesProjet')[0];
 const titre = document.getElementsByClassName('titre')[0];
+const link = document.getElementsByClassName('link')[0];
 const desc = document.getElementsByClassName('desc')[0];
 const footer = document.querySelector('footer div');
-const contact = footer.getElementsByClassName('contacts')[0]
+const contact = footer.getElementsByClassName('contacts')[0];
 
-contact.style.paddingLeft = "0px"
-
-textHidden.style.height = nav.parentNode.clientHeight + "px"
+contact.style.paddingLeft = "0px";
 
 const Container = document.createElement('div');
 Container.className = 'container';
@@ -28,9 +27,11 @@ Container.innerHTML = `
 
     <div class="textBloc">
         <div>
-            <h2 class="titre">
+            <a href="#">
+                <h2 class="titre">
 
-            </h2>
+                </h2>
+            </a>
 
             <h3 class="desc">
 
@@ -75,12 +76,15 @@ function resizeGrille(){
     Grille.style.top = grille.offsetTop+"px";
 }
 
-window.addEventListener('resize', resizeGrille)
+window.addEventListener('resize', () => {
+    resizeGrille();
+    textHidden.style.height = nav.parentNode.clientHeight + "px";
+});
 
 const projets = [
-    {'titre': 'Mimesis', 'desc': "Mimesis est un jeu à choix narratifs en 2D dans lequel vous incarnez un testeur de sécurité qui a été embauché par le directeur du musée Mimesis afin de dérober une oeuvre et ainsi exposer les différentes failles de sécurité du lieu.", 'img': ['mimesis_main.png', 'mimesis_in_game.png', 'mimesis_end.png']},
-    {'titre': 'Astrogame', 'desc': "Astrogame est un jeu d'arcade en 2D dans lequel vous incarnez un astronaute qui a atterri sur Mars et qui doit survivre face à une pluie de météorites qui s'abat.", 'img': ['astrogame_main.png', 'astrogame_in_game.png', 'astrogame_end.png']},
-    {'titre': 'Game of life', 'desc': "Très connu jeu de la vie de John Conway recréé sous Python, dan lequel vous pouvez simuler le développement de cellules selon les règles initiales et un placement qui vous est propre. Existe en deux version : une version carte réduite à l'écran, et une version à carte exponentielle mais moins performante.", 'img': ["jeu_de_la_vie.jpg"]}
+    {'titre': 'Mimesis', 'desc': "Mimesis est un jeu à choix narratifs en 2D dans lequel vous incarnez un testeur de sécurité qui a été embauché par le directeur du musée Mimesis afin de dérober une oeuvre et ainsi exposer les différentes failles de sécurité du lieu.", 'img': ['mimesis_main.png', 'mimesis_in_game.png', 'mimesis_end.png'], 'url': "https://github.com/Goldenblac-k/Mimesis"},
+    {'titre': 'Astrogame', 'desc': "Astrogame est un jeu d'arcade en 2D dans lequel vous incarnez un astronaute qui a atterri sur Mars et qui doit survivre face à une pluie de météorites qui s'abat.", 'img': ['astrogame_main.png', 'astrogame_in_game.png', 'astrogame_end.png'], 'url': "https://github.com/Goldenblac-k/Astrogame"},
+    {'titre': 'Game of life', 'desc': "Très connu jeu de la vie de John Conway recréé sous Python, dan lequel vous pouvez simuler le développement de cellules selon les règles initiales et un placement qui vous est propre. Existe en deux version : une version carte réduite à l'écran, et une version à carte exponentielle mais moins performante.", 'img': ["jeu_de_la_vie.jpg"], 'url': "https://github.com/Goldenblac-k/The-Game-Of-Life"}
 ];
 var i_projets = 0;
 var last_i = 0;
@@ -111,6 +115,7 @@ function setContainer() {
         img.src = images[i_images];
     } catch (e) {};
     titre.textContent = projets[i_projets]['titre'];
+    link.href = projets[i_projets]['url'];
     desc.textContent = projets[i_projets]['desc'];
     container.style.transform = container.style.transform + " scale(1)";
     container.style.transition = 'none';

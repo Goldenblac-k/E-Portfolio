@@ -33,7 +33,7 @@ body > .centre {
 .around {
     position: relative;
     z-index: 10;
-    background-color: white;
+    background-color: #F5AFAF;
 }
 
 .subtitle {
@@ -368,6 +368,17 @@ nav h2:hover::after {
         border-left: none;
         border-bottom: 3px solid #faaeae;
     }
+}
+
+.link {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.link > h2 {
+    width: min-content;
+    text-wrap: nowrap;
 }
 
 .textBloc > div {
