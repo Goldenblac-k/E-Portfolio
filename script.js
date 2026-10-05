@@ -168,14 +168,14 @@ function swipProject(dir) {
                 
                 if (dir == 'right'){
                     container.style.transform = "translateX(-150%) scale(0.7)";
-                    container.style.filter = "contrast(0.7)"
+                    container.style.filter = "contrast(0.7)";
                     Container.style.transform = "translateX(0)";
-                    Container.style.filter = "contrast(1)"
+                    Container.style.filter = "contrast(1)";
                 } else {
                     container.style.transform = "translateX(150%) scale(0.7)";
-                    container.style.filter = "contrast(0.7)"
+                    container.style.filter = "contrast(0.7)";
                     Container.style.transform = "translateX(0)";
-                    Container.style.filter = "contrast(1)"
+                    Container.style.filter = "contrast(1)";
                 };
             });
         });
@@ -233,6 +233,6 @@ function scroll_to(targetId, duration = 1000) {
 }
 
 window.addEventListener('load', () => {
-    navBarre()
-    resizeGrille()
+    navBarre();
+    resizeGrille();
 });
