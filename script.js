@@ -59,14 +59,35 @@ Grille.innerHTML = `
     </div>
 `;
 
-const Grille_p = Grille.querySelectorAll('p');
-for (let i = 0; i < Grille_p.length; i++){
-    if (i%3 == 0) Grille_p[i].style.backgroundColor = "#faaeae";
-    if (i%3 == 1) Grille_p[i].style.backgroundColor = "#f3b9b9";
-    if (i%3 == 2) Grille_p[i].style.backgroundColor = "#f1c5c5";
-    if (i%3 == 0 && i > 2) Grille_p[i].style.backgroundColor = "#f1d3d3";
-    if (i%3 == 1 && i > 6) Grille_p[i].style.backgroundColor = "#f3e3e3";
-};
+const ps = Grille.querySelectorAll('p');
+
+ps[0].style.color = "rgba(96, 96, 96, 255)";
+let i = 0;
+let interval = null;
+
+function createInterv(){
+    if (interval) return;
+    interval = setInterval(() => {
+        ps[i].style.color = "rgba(96, 96, 96, 0)";
+        i = (i + 1) % 8;
+        setTimeout(() => {ps[i].style.color = "rgba(96, 96, 96, 255)";}, 1000);
+    }, 3500);
+}
+
+ps.forEach(p => {
+    p.textContent = "Survolez-moi";
+    p.addEventListener('mouseenter', () => {
+        clearInterval(interval)
+        ps.forEach(p2 => {
+            p2.style.color = "rgba(96, 96, 96, 0)";
+        })
+        interval = null
+    });
+    p.addEventListener('mouseleave', () => {
+        i = Array.prototype.indexOf.call(ps, p)
+        createInterv();
+    });
+});
 
 grille.parentNode.appendChild(Grille);
 
@@ -158,7 +179,7 @@ function swipProject(dir) {
             Container.style.transform = "translateX(-150%) scale(0.7)";
         };
         
-        Container.style.filter = "contrast(0.7)";
+        Container.style.filter = "contrast(0.5)";
 
         requestAnimationFrame(() => {
             void Container.offsetWidth;
@@ -168,12 +189,12 @@ function swipProject(dir) {
                 
                 if (dir == 'right'){
                     container.style.transform = "translateX(-150%) scale(0.7)";
-                    container.style.filter = "contrast(0.7)";
+                    container.style.filter = "contrast(0.5)";
                     Container.style.transform = "translateX(0)";
                     Container.style.filter = "contrast(1)";
                 } else {
                     container.style.transform = "translateX(150%) scale(0.7)";
-                    container.style.filter = "contrast(0.7)";
+                    container.style.filter = "contrast(0.5)";
                     Container.style.transform = "translateX(0)";
                     Container.style.filter = "contrast(1)";
                 };
@@ -235,4 +256,6 @@ function scroll_to(targetId, duration = 1000) {
 window.addEventListener('load', () => {
     navBarre();
     resizeGrille();
+    createInterv();
+    textHidden.style.height = nav.parentNode.clientHeight + "px";
 });
